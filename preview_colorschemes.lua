@@ -1,6 +1,5 @@
 local preview_colorschem = {}
 
--- New functions for saving and loading colorscheme
 local function save_colorscheme()
     local colorscheme = vim.g.colors_name
     local file = io.open(vim.fn.stdpath('config') .. '/colorscheme.vim', 'w')
@@ -39,15 +38,15 @@ end
 preview_colorschem.setup = function()
     vim.cmd('augroup PreviewColorscheme')
     vim.cmd('autocmd!')
-    vim.cmd('autocmd CmdlineChanged : lua require("core.plugin_config.preview_colorschemes")._preview_colorscheme()') -- Updated to call the function from within the module
-    vim.cmd('autocmd ColorScheme * lua require("core.plugin_config.preview_colorschemes").save_colorscheme()') -- New AutoCommand to save colorscheme
+    vim.cmd('autocmd CmdlineChanged : lua require("core.plugin_config.preview_colorschemes")._preview_colorscheme()') 
+    vim.cmd('autocmd ColorScheme * lua require("core.plugin_config.preview_colorschemes").save_colorscheme()') 
     vim.cmd('augroup END')
 
-    load_colorscheme() -- Load the last used colorscheme
+    load_colorscheme() 
 end
 
 preview_colorschem._preview_colorscheme = _preview_colorscheme
-preview_colorschem.save_colorscheme = save_colorscheme -- Make the new functions available outside the module
+preview_colorschem.save_colorscheme = save_colorscheme 
 preview_colorschem.load_colorscheme = load_colorscheme
 
 return preview_colorschem
