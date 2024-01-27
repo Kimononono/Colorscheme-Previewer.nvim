@@ -13,7 +13,7 @@ Requirements
   
   2. Add the line
   
-    require('<PATH TO PREVIEW_COLORSCHEMES FILE>')
+    require('<PATH TO PREVIEW_COLORSCHEMES FILE>').setup()
    to your init.lua
 
 ## Usage
