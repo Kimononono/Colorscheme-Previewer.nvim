@@ -36,18 +36,20 @@ local function _preview_colorscheme()
 end
 
 M.setup = function()
-	vim.cmd([[
-		augroup PreviewColorscheme
-    autocmd!
-    autocmd CmdlineChanged : lua require("core.plugin_config.preview_colorschemes")._preview_colorscheme()
-    autocmd ColorScheme * lua require("core.plugin_config.preview_colorschemes").save_colorscheme()
-    augroup END]])
+	local color_preview = vim.api.nvim_create_augroup("aesthetic_settings", { clear = true })
+
+	vim.api.nvim_create_autocmd("CmdlineChanged", {
+		callback = _preview_colorscheme,
+		group = color_preview
+	})
+
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		callback = save_colorscheme,
+		group = color_preview
+	})
+
 
 	load_colorscheme()
 end
-
-M._preview_colorscheme = _preview_colorscheme
-M.save_colorscheme = save_colorscheme
-M.load_colorscheme = load_colorscheme
 
 return M
